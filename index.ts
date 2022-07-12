@@ -1,8 +1,6 @@
 import Spyce from "./Spyce";
 
 
-
-
 const spyce = Spyce (3000);
 
 const api = spyce.createAPI("/api");

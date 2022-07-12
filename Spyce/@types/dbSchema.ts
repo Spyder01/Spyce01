@@ -7,6 +7,8 @@ interface SchemaItem {
     type: string|Schema;
     required?: boolean;
     default?: any;
+    allowNull?: boolean;
+    primaryKey?: boolean;
 }
 
 

@@ -1,10 +1,11 @@
-import { ModelBody, ORM } from "./ORM";
-import { connect, Models, SchemaTypes } from "mongoose";
+import { ORM } from "./ORM";
+import { connect } from "mongoose";
 import { model as MongoModel, Schema as MongoSchema, SchemaDefinition } from "mongoose";
 import Schema from "../@types/dbSchema";
+import { ModelOptions, ModelType } from "../@types/model";
 
 class Mongo {
-    private options: any;
+    private options: ModelOptions;
     private models: MongoORM[];
 
     constructor(options: any) {
@@ -21,7 +22,7 @@ class Mongo {
 
     private async connect(callback: () => void = () => { console.log("Mongo connected") }): Promise<void> {
         try {
-            await connect(this.options.uri);
+            await connect(this.options.uri || "");
             callback();
         } catch (error) {
             throw error;
@@ -89,8 +90,8 @@ class MongoORM implements ORM {
         return this.model.deleteOne(ele);
     }
 
-    async addAll(ele: object[], callback?: ()=>void | (()=>Promise <void>)): Promise<void> {
-        for (let i=0; i<ele.length; i++) {
+    async addAll(ele: object[], callback?: () => void | (() => Promise<void>)): Promise<void> {
+        for (let i = 0; i < ele.length; i++) {
             await this.add(ele[i]);
         }
         if (callback) {
@@ -106,8 +107,9 @@ class MongoORM implements ORM {
                 switch (element.type) {
                     case "string":
                         parsed[key] = {
-                            ...element,
-                            type: String
+                            type: String,
+                            required: element.required ? true : false,
+                            default: element.default ? element.default : null,
                         };
                         break;
                     case "number":
@@ -118,7 +120,8 @@ class MongoORM implements ORM {
                         break;
                     case "boolean":
                         parsed[key] = {
-                            ...element,
+                            required: element.required ? true : false,
+                            default: element.default ? element.default : null,
                             type: Boolean
                         };
 
@@ -126,7 +129,8 @@ class MongoORM implements ORM {
                     default:
                         if (typeof element.type !== "string") {
                             parsed[key] = {
-                                ...element,
+                                required: element.required ? true : false,
+                                default: element.default ? element.default : null,
                                 type: this.parser(element.type)
                             };
                         }
@@ -140,3 +144,5 @@ class MongoORM implements ORM {
 
 
 export default Mongo;
+
+export { MongoORM };

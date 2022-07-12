@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from 'sequelize';
 import { ModelOptions } from "../@types/model";
 import Schema from "../@types/dbSchema";
-import { ORM, ModelBody } from "./ORM";
+import { ORM } from "./ORM";
 
 class SQL {
     private options: ModelOptions;

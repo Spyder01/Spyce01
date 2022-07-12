@@ -13,12 +13,6 @@ api.request ("/", {
     }
 });
 
-const model = spyce.model({
-    dialect: "mongo",
-    uri: "mongodb+srv://MiniProject:SuhanBhavithaMiniProjectTeam123@cluster0.v4vzz.mongodb.net/?retryWrites=true&w=majority",
-})
-
-
 
 
 

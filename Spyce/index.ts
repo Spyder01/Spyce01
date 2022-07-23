@@ -1,4 +1,6 @@
 import spyce from "./spyce";
+import Model from "./model";
+import Instance from "./Instance";
 
 const Spyce = (port:number)=>{
     return new spyce(port);
@@ -6,3 +8,9 @@ const Spyce = (port:number)=>{
 
 
 export default Spyce;
+
+
+export {
+    Model,
+    Instance
+}

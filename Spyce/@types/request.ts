@@ -1,7 +1,7 @@
-import {NextFunction, Request as ExpressRequest, Response as ExpressResponse} from 'express';
+import {NextFunction, Request as ExpressRequest, Response as ExpressResponse, RequestHandler as ExpressRequestHandler, Application} from 'express';
 
 
-type Request = (arg0: ExpressRequest, arg1: ExpressResponse, next?:NextFunction)=>Promise<void>|void;
+type Request = ((arg0: ExpressRequest|ExpressRequestHandler, arg1: ExpressResponse, next?:NextFunction)=>Promise<void>|void) | any;
 
 interface APIRequest {
     GET?: Request;

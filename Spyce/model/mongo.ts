@@ -53,7 +53,6 @@ class MongoORM implements ORM {
     }
 
     async add(ele: object, callback?: () => void): Promise<void> {
-        console.log(this.model, ele);
         const doc = new this.model(ele);
         await doc.save();
         if (callback) {

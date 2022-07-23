@@ -1,17 +1,11 @@
 import Spyce from "./Spyce";
+import {Instance, Model} from "./Spyce";
+import SpyceTest from "spyce-core"
 
-
-const spyce = Spyce (3000);
-
-const api = spyce.createAPI("/api");
-
-api.request ("/", {
-    GET: (req, res) => {
-        res.send("Hello World");
-    }
-});
+console.log (SpyceTest)
 
 
 
+export default Spyce;
 
-spyce.listen (()=>console.log ("Server running on port: ", spyce.getPort ()));
+export {Instance, Model};

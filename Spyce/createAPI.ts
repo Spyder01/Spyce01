@@ -1,10 +1,14 @@
-import type { Express } from "express";
+import type { Express, Application} from "express";
 import { APIRequest } from "./@types/request";
+import { Router } from "express";
+
+
+
 
 class CreateAPI {
     private path: string;
-    private app: Express;
-    constructor(path:string, app: Express) {
+    private app: Express|Application|Router;
+    constructor(path:string, app: Express|Application|Router) {
         this.path = path;
         this.app = app;
     }
@@ -38,6 +42,7 @@ class CreateAPI {
 
         }
     }
+
 }
 
 export default CreateAPI;
